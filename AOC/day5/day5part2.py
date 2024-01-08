@@ -5,10 +5,13 @@ def conversion(numbers, maps):
         temp = []
         for line in maps:
             d, s, r = map(int, line.split(' '))
+            # MAP INTERVALS
             if s <= a < s + r and b <= s + r:
+            # APPEND TO TEMP IF INSIDE INTERVAL
                 temp.append((a - s + d, b - s + d))
                 break
             elif s > a and b > s + r:
+            # APPEND TO NUMBERS IF NOT INSIDE INTERVAL SO IT CAN BE CHECKED AGAIN
                 numbers.append((a, s - 1))
                 temp.append((s - s + d, s + r - s + d))
                 numbers.append((r + s + 1, b))
@@ -21,22 +24,23 @@ def conversion(numbers, maps):
                 temp.append((a - s + d, s + r - s + d))
                 numbers.append((s + r, b))
                 break
+        # IF NOT INSIDE ANY INTERVAL, APPEND TO TEMP THE ORIGINAL NUMBERS
         if len(temp) == 0:
             temp.append((a, b))
         result += temp
     return result
 
 def maps(x):
-    maP = parsed_data[x].split('\n')
+    maP = cleaned_data[x].split('\n')
     maP.pop(0)
     return maP
 
 with open('input.txt', 'r') as file:
     data = file.read()
-    parsed_data = data.strip().split('\n\n')
+    cleaned_data = data.strip().split('\n\n')
 
 # SEEDS
-title, seeds_numbers = parsed_data[0].split(': ')
+title, seeds_numbers = cleaned_data[0].split(': ')
 seeds_range = seeds_numbers.split(' ')
 
 i = 0
