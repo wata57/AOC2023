@@ -12,7 +12,6 @@ for line in y.split('\n'):
     spots.append(a)
 
 
-result = 0
 c = 1
 i = 0
 x = 'AAA'
@@ -22,11 +21,9 @@ while True:
         i = 0
     n = instr[i]
     if netmap[x][n] == 'ZZZ':
-        result = c
+        print(c)
         break
     else:
         c += 1
         i += 1
         x = netmap[x][n]
-
-print(result)
