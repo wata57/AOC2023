@@ -1,26 +1,40 @@
-card_str = {
-    'A': 14, 
-    'K': 13,
-    'Q': 12,
-    'J': 11,
-    'T': 10,
-    '9': 9, 
-    '8': 8,
-    '7': 7,
-    '6': 6,
-    '5': 5,
-    '4': 4, 
-    '3': 3,
-    '2': 2,
-}
+def is_onepair(mapcards, noJ, card):
+    if max(mapcards.values()) == 2 and list(mapcards.values()).count(2) == 1:
+        onepair.append(card)
+        return True
+    elif max(mapcards.values()) == 1:
+        if mapcards.get('J', -1) == 1:
+            onepair.append(card)
+            return True
+    return False
 
-your_list = ['KKK8K', 'KK7KK', '6666Q', '55655', '33336', 'TT3TT', 'TTT4T', '55855', 'TTT5T', '3J333', '77778', 'AAAA5', '99699', 'QQJQQ', 'QAQQQ', 'TTTKT', 'AA7AA', '84888', '66656', '47444', '9Q999', '4J444', 'TTQTT', '4A444', '2TTTT', '66663', '99799', 'QQQQ3', '2222K', '999K9', '66J66', '888J8', 'AA9AA', '22262', '8T888', '77767', 'K4KKK', '3AAAA', 'JAAAA', 'TTTT9', 'AKAAA', '2AAAA', '5QQQQ', 'QQKQQ', '22822', '33393', '69666', '44424', '33A33', 'KKKKT', '7QQQQ', 'AA8AA', '3T333', '2KKKK', '73777', 'KKJKK', '44445', '55554', 'TTTT7', '75555', '78888', '29999', '2222J', '55Q55', '33Q33', '6TTTT', '555J5', '9J999', '777A7', '33323', '55595', 'A5555', 'TTTTJ', '98888', 'TAAAA', '66646', '86888', '77K77', '33335', '77277', '99989', '2222T', 'AQAAA', '33433', '44484', '62666', '35555', '7777T', 'TT8TT', '44434', '33373', '25555', '58888', '2A222', '44494', '777J7', '25222', 'AAA6A', 'J8JJJ', '44T44']
-['KKK8K', 'KK7KK', '6666Q', '55655', '33336', 'TT3TT', 'TTT4T', '55855', 'TTT5T', '3J333', '77778', 'AAAA5', '99699', 'QQJQQ', 'QAQQQ', 'TTTKT', 'AA7AA', '84888', '66656', '47444', '9Q999', '4J444', 'TTQTT', '4A444', '2TTTT', '66663', '99799', 'QQQQ3', '2222K', '999K9', '66J66', '888J8', 'AA9AA', '22262', '8T888', '77767', 'K4KKK', '3AAAA', 'JAAAA', 'TTTT9', 'AKAAA', '2AAAA', '5QQQQ', 'QQKQQ', '22822', '33393', '69666', '44424', '33A33', 'KKKKT', '7QQQQ', 'AA8AA', '3T333', '2KKKK', '73777', 'KKJKK', '44445', '55554', 'TTTT7', '75555', '78888', '29999', '2222J', '55Q55', '33Q33', '6TTTT', '555J5', '9J999', '777A7', '33323', '55595', 'A5555', 'TTTTJ', '98888', 'TAAAA', '66646', '86888', '77K77', '33335', '77277', '99989', '2222T', 'AQAAA', '33433', '44484', '62666', '35555', '7777T', 'TT8TT', '44434', '33373', '25555', '58888', '2A222', '44494', '777J7', '25222', 'AAA6A', 'J8JJJ', '44T44'] # Replace ellipsis with the actual elements
+def is_three(mapcards, noJ, card):
+    if 3 in mapcards.values() and 2 not in mapcards.values():
+        threek.append(card)
+        return True
+    if max(mapcards.values()) == 2 and list(mapcards.values()).count(2) == 1:
+        if mapcards.get('J', -1) == 1:
+            threek.append(card)
+            return True
+    if max(noJ.values()) == 1:
+        if mapcards.get('J', -1) == 2:
+            threek.append(card)
+            return True
+    return False
 
-# Sort the list using the custom key function
-#sorted_list = sorted(your_list, key=lambda item: [card_str[char] for char in item])
+with open('test.txt', 'r') as file:
+    data = (file.read()).strip().split('\n')
 
-# Print the sorted list
-#print(sorted_list)
+cards_bids = {}
+fivek = []
+fourk = []
+fullh = []
+threek = []
+twopair = []
+onepair = []
+highcard = []
 
-print([card_str[char] for char in item])
+for line in data:
+    x, y = line.split(' ')
+    cards_bids[x] = y
+
