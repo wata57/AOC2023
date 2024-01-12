@@ -1,8 +1,4 @@
-def is_correct(spots):
-    for spot in spots:
-        if spot[-1] != "Z":
-            return False
-    return True 
+import math
 
 with open('input.txt', 'r') as file:
     x, y = (file.read()).strip().split('\n\n')
@@ -21,25 +17,33 @@ for key in netmap:
     if key[-1] == 'A':
         spots.append(key)
 
-i = 0
-c = 0
 result = []
 
-print(spots)
+count = 0
+i = 0
+c = 1
+numbers = []
 
+# for each sequence that ends with 'A'
+for x in spots:
+    temp = []
+    while True:
+        # Return to first instruction after reaching the last one
+        if i == len(instr):
+            i = 0
+        # Choose right or left based on the instruction list
+        n = instr[i]
+        # if last char is Z, append the count to the list 'numbers'
+        if (netmap[x][n])[-1] == 'Z':
+            numbers.append(c)
+            c = 1
+            i = 0
+            break
+        else:
+            # if last char isn't 'Z', choose right or left and move to next one
+            c += 1
+            i += 1
+            x = netmap[x][n]
 
-while not is_correct(spots):
-    if i == len(instr):
-        i = 0
-    new_spots = []
-    n = instr[i]
-    for spot in spots:
-        new_spots.append(netmap[spot][n])
-    spots = new_spots
-    print(spots)
-    c += 1
-    i += 1
-    if (spots[0])[-1] == 'Z':
-        print(spots)
-        break
-print(c)
+result = math.lcm(*numbers)
+print(result)
