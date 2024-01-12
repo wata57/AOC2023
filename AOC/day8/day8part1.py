@@ -5,7 +5,7 @@ with open('input.txt', 'r') as file:
 instr = [1 if char == 'R' else 0 for char in x]
 
 
-# Create a dictionary to store nodes as 'XXX' as keys and ('XXX', 'XXX') as values
+# Turning data into a dictionary
 netmap = {}
 
 for line in y.split('\n'):
