@@ -1,4 +1,7 @@
 import math
+import time
+
+start_time = time.time()
 
 with open('input.txt', 'r') as file:
     x, y = (file.read()).strip().split('\n\n')
@@ -23,7 +26,6 @@ numbers = []
 result = []
 
 for x in spots:
-    temp = []
     while True:
         # Return to first instruction after reaching the last one
         if i == len(instr):
@@ -46,5 +48,12 @@ for x in spots:
 
 # Finding LCM of all c
 
-result = math.lcm(numbers)
+result = math.lcm(*numbers)
 print(result)
+
+end_time = time.time()
+
+total_time = end_time - start_time
+
+print(f"run time = {total_time}")
+

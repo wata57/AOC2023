@@ -13,9 +13,6 @@ for r in range(len(s)):
             hms[(r, (c))] = s[r][c]
         if s[r][c].isdigit():
             hm[(r, (c))] = s[r][c]
-
-for r in range(len(s)):
-    for c in range(len(s[0])):
         if (r,c-1) in hm and s[r][c].isdigit():
             hm[(r,(c-1,c))] = s[r][c-1] + s[r][c]
             hm.pop((r,c))
@@ -24,7 +21,6 @@ for r in range(len(s)):
             hm[(r,(c-2,c-1,c))] = s[r][c-2] + s[r][c-1] + s[r][c]
             hm.pop((r,c))
             hm.pop((r,(c-2,c-1)))
-
 
 for key in hm:
     # one digit number
