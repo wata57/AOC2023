@@ -20,7 +20,7 @@ for r in range(len(s)):
             hm[(r,(c-1,c))] = s[r][c-1] + s[r][c]
             hm.pop((r,c))
             hm.pop((r,c-1))
-        elif (r,(c-2,c-1)) in hm and s[r][c].isdigit():
+        if (r,(c-2,c-1)) in hm and s[r][c].isdigit():
             hm[(r,(c-2,c-1,c))] = s[r][c-2] + s[r][c-1] + s[r][c]
             hm.pop((r,c))
             hm.pop((r,(c-2,c-1)))
